@@ -6,8 +6,11 @@ const eventsSchema = new mongoose.Schema({
     type: String,
     required: true
   },
+  date: {
+    type: String,
+    required: true
+  }
 });
-
 
 export const Events = mongoose.model('Events', eventsSchema);
 
