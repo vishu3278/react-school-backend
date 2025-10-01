@@ -10,6 +10,10 @@ const attendanceSchema = new mongoose.Schema({
     type: String,
     enum: ['Present', 'Absent', 'Absent with apology'],
     required: true
+  },
+  date: {
+    type: Date,
+    required: true
   }
 });
 
