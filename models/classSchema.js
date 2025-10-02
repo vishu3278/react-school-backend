@@ -6,6 +6,9 @@ const classSchema = new mongoose.Schema({
     type: String,
     required: true
   },
+  subjects: {
+    type: Array,
+  }
 });
 
 

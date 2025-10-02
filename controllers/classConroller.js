@@ -2,7 +2,7 @@ import {  Class } from "../models/classSchema.js";
 import { handleValidationError } from "../middlewares/errorHandler.js";
 
 export const createClass = async (req, res, next) => {
-  console.log(req.body);
+  // console.log(req.body);
   const {grade } = req.body;
   try {
     if (!grade ) {
@@ -12,6 +12,25 @@ export const createClass = async (req, res, next) => {
   res.status(200).json({
     success: true,
     message: "Class Created!",
+  }); 
+  } catch (err) {
+    next(err);
+  }
+};
+
+export const updateClass = async (req, res, next) => {
+  console.log(req.body);
+  const {grade, subjects} = req.body;
+  try {
+    if (!grade ) {
+      handleValidationError("Please Fill Form!", 400);
+  }
+  // await Class.create({ grade });
+  const res = await Class.updateOne({grade: grade}, {grade, subjects})
+  console.log(res.upsertedId, res.upsertedCount)
+  res.status(200).json({
+    success: true,
+    message: "Class updated",
   }); 
   } catch (err) {
     next(err);

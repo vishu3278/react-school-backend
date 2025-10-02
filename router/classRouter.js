@@ -5,7 +5,7 @@ const router = express.Router();
 
 router.get('/getall', getAllClasses);
 router.post('/', createClass);
-
+router.put('/update', updateClass);
 
 export default router;
 
