@@ -19,19 +19,26 @@ export const createClass = async (req, res, next) => {
 };
 
 export const updateClass = async (req, res, next) => {
-  console.log(req.body);
+  // console.log(req.body);
   const {grade, subjects} = req.body;
   try {
     if (!grade ) {
       handleValidationError("Please Fill Form!", 400);
-  }
-  // await Class.create({ grade });
-  const res = await Class.updateOne({grade: grade}, {grade, subjects})
-  console.log(res.upsertedId, res.upsertedCount)
-  res.status(200).json({
-    success: true,
-    message: "Class updated",
-  }); 
+    }
+    // await Class.create({ grade });
+    const q = await Class.updateOne({grade: grade}, {grade, subjects})
+    // console.log(q.modifiedCount)
+    if (q.modifiedCount == 1) {
+      res.status(200).json({
+        success: true,
+        message: "Class updated",
+      });
+    } else {
+      res.status(201).json({
+        success: false,
+        message: "Failed to update"
+      })
+    }
   } catch (err) {
     next(err);
   }

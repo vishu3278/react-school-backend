@@ -1,5 +1,5 @@
 import express from "express";
-import { getAllClasses, createClass } from "../controllers/classConroller.js";
+import { getAllClasses, createClass, updateClass } from "../controllers/classConroller.js";
 
 const router = express.Router();
 
