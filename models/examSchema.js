@@ -14,7 +14,7 @@ const examSchema = new mongoose.Schema({
     required: true
   },
   marks: {
-    type: Number,
+    type: Array,
     required: true
   }
 });
