@@ -15,6 +15,32 @@ const studentSchema = new mongoose.Schema({
     type: String,
     required: true
   },
+  dob: {
+    type: Date,
+    required: true
+  },
+  motherName: {
+    type: String,
+    required: true
+  },
+  fatherName: {
+    type: String,
+    required: true
+  },
+  aadharNumber: {
+    type: String,
+    required: true,
+    unique: true
+  },
+  address: {
+    type: String,
+    required: true
+  },
+  rollNumber: {
+    type: String,
+    required: true,
+    unique: true
+  },
 });
 
 

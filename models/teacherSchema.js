@@ -7,6 +7,11 @@ const teacherSchema = new mongoose.Schema({
   },
   email: {
     type: String,
+    unique: true,
+    sparse: true
+  },
+  mobile: {
+    type: String,
     required: true,
     unique: true
   },
@@ -14,6 +19,11 @@ const teacherSchema = new mongoose.Schema({
     type: String,
     required: true
   },
+  status: {
+    type: String,
+    enum: ['active', 'inactive'],
+    default: 'active'
+  }
 });
 
 

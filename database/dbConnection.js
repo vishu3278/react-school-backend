@@ -18,16 +18,16 @@ run().catch(console.dir);*/
 
 import mongoose from "mongoose";
 
-export const dbConnection = () => {
-    mongoose.connect(process.env.MONGO_URL, {
-        dbName: "react_school",
-    })
-    .then(() => {
-        console.log("Connected to database");
-    })
-    .catch((error) => {
-        console.log("Error occured while connecting to database");
+export const dbConnection = async () => {
+  try {
+    await mongoose.connect(process.env.MONGO_URL, {
+      dbName: "react_school",
     });
+    console.log("Connected to database");
+  } catch (error) {
+    console.error("Error occurred while connecting to database:", error);
+    throw error;
+  }
 };
 
 
