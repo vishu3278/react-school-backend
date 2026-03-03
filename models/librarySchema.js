@@ -11,6 +11,16 @@ const librarySchema = new mongoose.Schema({
     required: true,
     unique: true
   },
+  className: {
+    type: String,
+    required: false,
+    default: "",
+  },
+  price: {
+    type: Number,
+    required: false,
+    default: 0,
+  }
 });
 
 
