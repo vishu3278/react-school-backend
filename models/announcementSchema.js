@@ -6,6 +6,12 @@ const announcementSchema = new mongoose.Schema({
     type: String,
     required: true
   },
+  startDate: {
+    type: Date,
+  },
+  endDate: {
+    type: Date,
+  }
 });
 
 export const Announcement = mongoose.model('Announcement', announcementSchema);
