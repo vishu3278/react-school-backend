@@ -17,6 +17,7 @@ import usersRouter from "./router/usersRouter.js"
 import adminRegisterRouter from "./router/adminRegisterRouter.js"
 import performanceRouter from "./router/performanceRouter.js"
 import profileRouter from "./router/profileRouter.js"
+import feeStructureRouter from "./router/feesRouter.js"
 import { errorHandler } from "./middlewares/errorHandler.js";
 
 
@@ -50,6 +51,7 @@ app.use("/api/v1/performance", performanceRouter);
 app.use("/api/v1/users", usersRouter);
 app.use("/api/v1/register", adminRegisterRouter);
 app.use("/api/v1/profile", profileRouter);
+app.use("/api/v1/fees", feeStructureRouter);
 
 // Error Handling Middleware (MUST BE LAST)
 app.use(errorHandler);
