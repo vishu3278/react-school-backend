@@ -8,7 +8,7 @@ const studentSchema = new mongoose.Schema({
     required: true
   },
   registrationNumber: {
-    type: String,
+    type: Number,
     unique: true,
     immutable: true
   },
@@ -28,19 +28,26 @@ const studentSchema = new mongoose.Schema({
     type: String,
     required: true
   },
+  phone1: {
+    type: Number,
+    required: true
+  },
+  phone2: {
+    type: Number,
+    required: false
+  },
   aadharNumber: {
-    type: String,
-    required: true,
-    unique: true
+    type: Number,
+    unique: true,
+    sparse: true
   },
   address: {
     type: String,
     required: true
   },
   rollNumber: {
-    type: String,
-    required: true,
-    unique: true
+    type: Number,
+    sparse: true
   },
 });
 
@@ -57,8 +64,8 @@ studentSchema.pre('save', async function (next) {
       { new: true, upsert: true }
     );
 
-    // Format to 6-digit sequential unique number (e.g., 000001)
-    this.registrationNumber = counter.seq.toString().padStart(6, '0');
+    // Format to sequential unique number
+    this.registrationNumber = counter.seq;
     next();
   } catch (error) {
     next(error);

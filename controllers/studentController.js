@@ -3,12 +3,17 @@ import { handleValidationError } from "../middlewares/errorHandler.js";
 
 export const createStudent = async (req, res, next) => {
   console.log(req.body);
-  const { name, grade, dob, motherName, fatherName, aadharNumber, address, rollNumber } = req.body;
+  const { name, grade, dob, motherName, fatherName, phone1, phone2, aadharNumber, address, rollNumber } = req.body;
   try {
-    if (!name || !grade || !motherName || !fatherName || !aadharNumber || !address || !rollNumber) {
-      return next("Please Fill Full Form!", 400);
+    if (!name || !grade || !motherName || !fatherName || !phone1 || !address) {
+      return res.status(400).json({ 
+        success: false, 
+        message: "Please fill all mandatory fields (Name, Grade, DOB, Parents' Names, Phone 1, and Address)" 
+      });
     }
-    const student = await Student.create({ name, grade, dob, motherName, fatherName, aadharNumber, address, rollNumber });
+    const student = await Student.create({ 
+      name, grade, dob, motherName, fatherName, phone1, phone2, aadharNumber, address, rollNumber 
+    });
     res.status(200).json({
       success: true,
       message: "Student Created!",
@@ -21,7 +26,7 @@ export const createStudent = async (req, res, next) => {
 
 export const updateStudent = async (req, res, next) => {
   const { id } = req.params;
-  const { name, grade, dob, motherName, fatherName, aadharNumber, address, rollNumber } = req.body;
+  const { name, grade, dob, motherName, fatherName, phone1, phone2, aadharNumber, address, rollNumber } = req.body;
   try {
     let student = await Student.findById(id);
     if (!student) {
@@ -29,7 +34,7 @@ export const updateStudent = async (req, res, next) => {
     }
 
     student = await Student.findByIdAndUpdate(id, {
-      name, grade, dob, motherName, fatherName, aadharNumber, address, rollNumber
+      name, grade, dob, motherName, fatherName, phone1, phone2, aadharNumber, address, rollNumber
     }, { new: true, runValidators: true });
 
     res.status(200).json({
