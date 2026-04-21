@@ -30,11 +30,25 @@ const studentSchema = new mongoose.Schema({
   },
   phone1: {
     type: Number,
-    required: true
+    required: true,
+    validate: {
+      validator: function(v) {
+        const s = v.toString();
+        return s.length === 10 || s.length === 1;
+      },
+      message: props => `${props.value} is not a valid phone number! It must be exactly 10 digits or 1 digit.`
+    }
   },
   phone2: {
     type: Number,
-    required: false
+    required: false,
+    validate: {
+      validator: function(v) {
+        if (!v) return true;
+        return v.toString().length === 10;
+      },
+      message: props => `${props.value} is not a valid phone number! It must be exactly 10 digits.`
+    }
   },
   aadharNumber: {
     type: Number,
@@ -46,8 +60,15 @@ const studentSchema = new mongoose.Schema({
     required: true
   },
   rollNumber: {
-    type: Number,
-    sparse: true
+    type: Number
+  },
+  religion: {
+    type: String,
+    enum: ["Hindu", "Muslim", "Sikh", "Jain", "Baudh", "Christian", "Other", "--"],
+    default: "--"
+  },
+  occupation: {
+    type: String
   },
 });
 
