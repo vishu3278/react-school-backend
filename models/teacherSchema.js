@@ -7,8 +7,9 @@ const teacherSchema = new mongoose.Schema({
   },
   email: {
     type: String,
-    unique: true,
-    sparse: true
+    trim: true,
+    lowercase: true,
+    default: undefined,
   },
   mobile: {
     type: String,
@@ -26,6 +27,7 @@ const teacherSchema = new mongoose.Schema({
   }
 });
 
+teacherSchema.index({ email: 1 }, { name: 'unique_email_when_present', partialFilterExpression: { email: { $type: "string" } } });
 
 export const Teacher = mongoose.model('Teacher', teacherSchema);
 
